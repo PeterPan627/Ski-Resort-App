@@ -1,10 +1,13 @@
 h1 {
     text-align: center;
-    color: white;
+    color: grey;
     padding: 25px 0px 25px 0px;
     font-weight: bold;
 }
-
+header {
+    background-image: url(../images/header.png);
+    background-size: cover;
+}
 footer {
     text-align: center;
     font-size: 10px;
