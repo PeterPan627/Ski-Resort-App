@@ -1,81 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
-    <script
-      src="https://kit.fontawesome.com/d02cd26d97.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat|Rajdhani|Raleway|Source+Code+Pro&display=swap"
-      rel="stylesheet"
-    />
+
+    <script src="https://kit.fontawesome.com/d02cd26d97.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Rajdhani|Raleway|Source+Code+Pro&display=swap"
+        rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-    <title>Document</title>
-  </head>
+    <title>Ski Resort Weather</title>
+</head>
 
-  <body>
+<body>
     <div class="container">
-      <header class="sticky-top">
-        <h1><i class="fas fa-snowflake"></i> Resort Snow Report</h1>
-      </header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Find Your Local Resort</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarColor01"
-          aria-controls="navbarColor01"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <form class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2 form-rounded"
-            type="text"
-            placeholder="zip code"
-          />
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
-      </nav>
-      <div id="resortDiv" class="row mb-5 mt-5 mx-auto">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"></div>
-      </div>
-      <div id="resortDiv" class="row mb-5 mt-5 mx-auto">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"></div>
-      </div>
+        <header class="sticky-top">
+            <h1><i class="fas fa-snowflake"></i> Resort Snow Report</h1>
+        </header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Find Your Local Resort</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 form-rounded" type="text" placeholder="zip code" id="search-input" />
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit" id="search-btn">
+                    Search
+                </button>
+            </form>
+        </nav>
 
-      <div id="weatherDiv" class="container bg-light"></div>
-      <div class="jumbotron">
+
+        <div id="resortsDiv" class="row mb-5 mt-5 mx-auto">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+        </div>
+        <div id="resortsDiv" class="row mb-5 mt-5 mx-auto">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+        </div>
+
+        <div id="weatherDiv" class="container bg-light"></div>
+        <div class="jumbotron">
             <h1 class="display-3">weather</h1>
             <p class="lead">its not snowing, try again</p>
             <hr class="my-4">
             <p class="lead">
-              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+
             </p>
-          </div>
+        </div>
     </div>
 
+    <div class="city"></div>
+    <div class="wind"></div>
+    <div class="clouds"></div>
+    <div class="temp"></div>
+
     <footer class="fixed-bottom bg-light">
-      copyright©
+        copyright©
     </footer>
 
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-    ></script>
-    <script type="text/javascript" src="assets/javascript/code.js"></script>
-  </body>
+
+
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Script -->
+    <script src="assets/javascript/app.js"></script>
+
+
+</body>
+
 </html>
