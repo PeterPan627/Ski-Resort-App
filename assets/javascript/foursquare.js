@@ -1,21 +1,7 @@
 
  var where = "Poconos";
-//  var queryURLfoursquare = "http://api.foursquare.com/v2/venues/search?near=" + where + "&categoryId=4bf58dd8d48988d1e9941735&client_id=SY05YPJRULEYP3Q5GJBEB2LI1MB20332I05CP4CGUHHKTTM1&client_secret=RUPCC30MW4NHIDHKNPFLKQWVRC4REW1HYPXMZMYS3TZN0DGJ&v=20191031";
 
 var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + where + "&term=ski+resort" ;
-
-// console.log("Is this thing working?");
-
-// $.ajax({
-//     url: queryURLfoursquare,
-//     method: "GET"
-// }).then(function(response){
-//     console.log(response);
-//     var name = response.response.venues[0].name;
-
-//     var lat = response.response.venues[0].location.lat;
-//     var long = response.response.venues[0].location.lng;
-//     var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + name + "&latitude=" + lat + "&longitude=" + long;
 
     $.ajax({
     url: queryURL,
@@ -25,9 +11,35 @@ var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/busi
     }
   }).then(function(response) {
 
-    // console.log("How about now?");
+    //Using jQuery, creates a div that will eventually be sent to the html site under "resortDiv"
+    var resortsDisplay = $("<div class='row'>");
+    resortsDisplay.append("<div class='col-md-2'></div>");
+
 
     console.log(response);
+    for(var i=0; i<4; i++){
+        var name = response.businesses[i].name;
+        var longitude = response.businesses[i].coordinates.latitude;
+        var latitude = response.businesses[i].coordinates.longitude;
+        var imageURL = response.businesses[i].imageURL;
+        var phone = response.businesses[i].display_phone;
+        var rating = response.businesses[i].rating;
+        resortsDisplay.append("<div class='col-md-2'>")
+        resortsDisplay.append("<strong>" + name + "</strong> <br/>");
+        resortsDisplay.append("<img src= '" + imageURL + "'> <br/>");
+        resortsDisplay.append(phone + "<br />");
+        resortsDisplay.append("Rating: " + rating + "<br/>");
+        resortsDisplay.append("Lat: " + latitude + "<br/>");
+        resortsDisplay.append("Long: " + longitude + "<br/>");
+        resortsDisplay.append("</div>");
+    }
+    resortsDisplay.append("</div>");
+    
+    
+    console.log(resortsDisplay);
+
+    $("#resortDiv").append(resortsDisplay);
+
 
 
 });
