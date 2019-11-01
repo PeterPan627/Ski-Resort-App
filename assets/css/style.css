@@ -1,27 +1,15 @@
 h1 {
-<<<<<<< HEAD
-    text-align: center;
-    color: grey;
-    padding: 25px 0px 0px 0px;
-    font-weight: bold;
-=======
   text-align: center;
   color: grey;
   padding: 25px 0px 25px 0px;
   font-weight: bold;
->>>>>>> 2d6269d4217df87a881ffe9d13ef0c16e4c94480
 }
 h5{
     text-align: center;
 }
 header {
-<<<<<<< HEAD
-    background-image: url(../images/header1.png);
-    background-size: cover;
-=======
   background-image: url(../images/header.png);
   background-size: cover;
->>>>>>> 2d6269d4217df87a881ffe9d13ef0c16e4c94480
 }
 footer {
   text-align: center;
