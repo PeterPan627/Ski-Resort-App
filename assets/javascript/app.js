@@ -1,33 +1,37 @@
+var userInput;
+var longitude;
+var latitude;
+
 // This function handles events where SEARCH button is clicked
 $("#search-btn").on("click", function(event) {
   event.preventDefault();
 
-  function clearInput() {
-    // clears input area for next entry
-    $("#search-input").val("");
-  }
-
   // This line will grab the text from the input box
-  var userInput = $("#search-input")
+  userInput = $("#search-input")
     .val()
     .trim();
 
   // Input validation
-  if (userInput.length > 1) {
+  if (userInput.length > 4) {
     // Calling functions to create cards and clear input
     renderCards();
     clearInput();
   } else {
-    alert("Please enter a word longer than 1 character.");
+    alert("Please enter a proper zip code");
     clearInput();
   }
 });
 
+function clearInput() {
+  // clears input area for next entry
+  $("#search-input").val("");
+}
+
 // BEGIN YELP API //
 
 function renderCards() {
-  // This will change to equal userInput, just hard-coded for now
-  var where = "poconos";
+  var where = userInput;
+  console.log("where: " + where);
 
   var numResults = 6;
 
@@ -159,11 +163,9 @@ function renderWeather() {
       var tempF = (tempK - 273.15) * 1.8 + 32;
       console.log("f temp: " + tempF);
       // Converting meters/sec to miles/hour (wind)
-      var metSec = response.wind.speed;
       var milesHr = response.wind.speed * 2.237;
       console.log("mph: " + milesHr);
-      // Making a new card
-      var newDiv = $("<div>");
+
       // Transfer content to HTML
       $(".city").html("<h1>" + response.name + " Weather Details</h1>");
       $(".wind").text("Wind Speed: " + tempF.toFixed(2) + " MPH");
