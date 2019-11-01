@@ -1,11 +1,14 @@
 h1 {
     text-align: center;
     color: grey;
-    padding: 25px 0px 25px 0px;
+    padding: 25px 0px 0px 0px;
     font-weight: bold;
 }
+h5{
+    text-align: center;
+}
 header {
-    background-image: url(../images/header.png);
+    background-image: url(../images/header1.png);
     background-size: cover;
 }
 footer {
