@@ -26,7 +26,7 @@ $("#search-btn").on("click", function(event) {
 // BEGIN YELP API //
 
 function renderCards() {
-  // This will change, just hard-coded for now
+  // This will change to equal userInput, just hard-coded for now
   var where = "poconos";
 
   var numResults = 6;
@@ -51,7 +51,6 @@ function renderCards() {
 
     var results = response.businesses;
 
-    // displayCards();
     $("#resortsDiv").empty();
 
     // First for-loop will loop through results and add businesses into resortsArray IF they match alias: skiresorts
@@ -92,10 +91,10 @@ function renderCards() {
       var cardImage = $("<img>");
       cardImage.addClass("card-img-top mb-3");
       cardImage.attr("src", imageURL);
+      cardImage.attr("id", "card-img");
 
       var cardBody = $("<div>");
       cardBody.addClass("card-body");
-      cardBody.attr("id", "resort-card");
 
       var title = $("<h4>");
       title.text(name);
@@ -109,10 +108,16 @@ function renderCards() {
       paragraph2.text(phone);
       paragraph2.addClass("card-text");
 
+      var cardButton = $("<button>");
+      cardButton.text("Get Weather");
+      cardButton.addClass("btn btn-primary");
+      cardButton.attr("id", "weather-btn");
+
       cardBody.append(cardImage);
       cardBody.append(title);
       cardBody.append(paragraph1);
       cardBody.append(paragraph2);
+      cardBody.append(cardButton);
       card.append(cardHeader);
       card.append(cardBody);
 
@@ -125,7 +130,8 @@ function renderCards() {
 
 function renderWeather() {
   var APIKey = "51deb09fc20d171f26bffd5637e7878c";
-  // This will be the user input postal code
+
+  // This will need to pull the lat/lon from the object associated with the card
   var latCoord = "40";
   var lonCoord = "75";
 
@@ -158,8 +164,6 @@ function renderWeather() {
       console.log("mph: " + milesHr);
       // Making a new card
       var newDiv = $("<div>");
-      // Add bootstrap class to card
-      // Insert weather data into card
       // Transfer content to HTML
       $(".city").html("<h1>" + response.name + " Weather Details</h1>");
       $(".wind").text("Wind Speed: " + tempF.toFixed(2) + " MPH");
@@ -173,6 +177,6 @@ function renderWeather() {
 }
 
 // // When cards with a id of 'resort-card' are clicked, call the displayWeather function
-// $(document).on("click", "#resort-card", renderWeather);
+$(document).on("click", "#weather-btn", renderWeather);
 
-renderWeather();
+// renderWeather();
