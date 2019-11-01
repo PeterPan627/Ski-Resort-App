@@ -14,3 +14,13 @@ footer {
     padding: 50px 0px 0px 0px;
     color: grey;
 }
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+
+}
+
+.form-rounded {
+    border-radius: 1rem;
+    max-width: 20rem
+    }
