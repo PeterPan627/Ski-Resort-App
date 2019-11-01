@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+    color: white;
+    padding: 25px 0px 25px 0px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    font-size: 10px;
+    padding: 50px 0px 0px 0px;
+    color: grey;
+}
