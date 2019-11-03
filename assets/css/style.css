@@ -1,14 +1,14 @@
 h1 {
   text-align: center;
   color: grey;
-  padding: 25px 0px 25px 0px;
+  padding: 25px 0px 10px 0px;
   font-weight: bold;
 }
 h5{
     text-align: center;
 }
 header {
-  background-image: url(../images/header.png);
+  background-image: url(../images/header1.png);
   background-size: cover;
 }
 footer {
@@ -16,13 +16,35 @@ footer {
   font-size: 10px;
   padding: 50px 0px 0px 0px;
   color: grey;
+  margin-top: 30px;
 }
-
+.fa-snowflake {
+  color: lightblue;
+}
 body {
   font-family: "Rajdhani", sans-serif;
 }
 
+#search-btn {
+    font-weight: bold;
+}
+
+#searchBar {
+    padding-left: 25px;
+}
+
+#search-input {
+  padding-left: 300px;
+}
+
+.width {
+  max-width: 20rem;
+  min-width: 20rem;
+}
 .form-rounded {
   border-radius: 1rem;
-  max-width: 20rem;
+}
+.jumbotron {
+  border-width: 10px;
+  border-color: lightblue;
 }
