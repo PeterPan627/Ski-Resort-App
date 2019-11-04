@@ -31,10 +31,8 @@ function clearInput() {
 
 function clearWeather() {
   // clears input area for next entry
-  $(".city").text("");
-  $(".wind").text("");
-  $(".clouds").text("");
-  $(".temp").text("");
+  $('#weatherDiv').hide();
+
 }
 
 // BEGIN YELP API //
@@ -104,6 +102,75 @@ function renderCards(zipcode) {
 
 
 
+    console.log(resortsArray);
+
+    // Second for-loop will loop through resortsArray and dynamically create cards for the first 3 results
+
+    for (var i = 0; i < numResults; i++) {
+      console.log(resortsArray[i]);
+      var name = resortsArray[i].name;
+      console.log("name: " + name);
+      var longitude = resortsArray[i].coordinates.longitude;
+      // console.log("long: " + longitude);
+      var latitude = resortsArray[i].coordinates.latitude;
+      // console.log("lat: " + latitude);
+      var imageURL = resortsArray[i].image_url;
+      // console.log("img url: " + imageURL);
+      var phone = resortsArray[i].display_phone;
+      // console.log("phone: " + phone);
+      var rating = resortsArray[i].rating;
+      // console.log("rating: " + rating);
+      var address = resortsArray[i].location.address1;
+
+      var card = $("<div>");
+      card.addClass("card border-info mb-3 form-rounded m-3 width");
+
+    
+
+      var cardHeader = $("<div>");
+      cardHeader.addClass("card-header form-rounded");
+      cardHeader.text("Rating: " + rating + " ");
+  
+      cardHeader.append("<i class='fa fa-star'></i>");
+
+      var cardImage = $("<img>");
+      cardImage.addClass("card-img-top mb-3");
+      cardImage.attr("src", imageURL);
+      cardImage.attr("id", "card-img");
+
+      var cardBody = $("<div>");
+      cardBody.addClass("card-body");
+      cardBody.attr("id", "resort-card");
+
+      var title = $("<h4>");
+      title.text(name);
+      title.addClass("card-title");
+
+      var paragraph1 = $("<p>");
+      paragraph1.text(address);
+      paragraph1.addClass("card-text");
+
+      var paragraph2 = $("<p>");
+      paragraph2.text(phone);
+      paragraph2.addClass("card-text");
+
+      var cardButton = $("<button>");
+      cardButton.text("Get Weather");
+      cardButton.addClass("btn btn-primary form-rounded");
+      cardButton.attr("id", "weather-btn");
+      cardButton.attr("lat", latitude);
+      cardButton.attr("lon", longitude);
+
+      cardBody.append(cardImage);
+      cardBody.append(title);
+      cardBody.append(paragraph1);
+      cardBody.append(paragraph2);
+      cardBody.append(cardButton);
+      card.append(cardHeader);
+      card.append(cardBody);
+
+      $("#resortsDiv").append(card);
+    }
   });
 
 
@@ -144,33 +211,28 @@ function renderWeather() {
       var tempK = response.main.temp;
       var tempF = (tempK - 273.15) * 1.8 + 32;
       console.log("f temp: " + tempF);
+
       // Converting meters/sec to miles/hour (wind)
-
-      var milesHr = response.wind.speed * 2.237;
-
-      // Transfer content to HTML
-      $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-      $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
-      $(".clouds").text("Clouds: " + response.clouds.all + "%");
-      $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
-      // Log the data in the console as well
-      console.log("Wind Speed: " + milesHr.toFixed(2));
-      var metSec = response.wind.speed;
       var milesHr = response.wind.speed * 2.237;
       console.log("mph: " + milesHr);
+
+      var weatherIcon = response.weather[0].icon;
+      console.log("weather icon " + weatherIcon);
+
+      var iconImage = $("<img>");
+      iconImage.attr("src", "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+
       // Making a new card
       var newDiv = $("<div>");
       // Add bootstrap class to card
       // Insert weather data into card
       // Transfer content to HTML
       $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-      $(".wind").text("Wind Speed: " + tempF.toFixed(2) + " MPH");
+      $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
       $(".clouds").text("Clouds: " + response.clouds.all + "%");
       $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
-      // Log the data in the console as well
-      console.log("Wind Speed: " + response.wind.speed);
-      console.log("Humidity: " + response.main.humidity);
-      console.log("Temperature (F): " + response.main.temp);
+      $(".description").text(response.weather[0].description).prepend(iconImage);
+    
     });
 
 }
