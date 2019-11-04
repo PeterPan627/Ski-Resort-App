@@ -1,7 +1,5 @@
 var userInput;
-var longitude;
-var latitude;
-
+$('#weatherDiv').hide();
 // This function handles events where SEARCH button is clicked
 $("#search-btn").on("click", function(event) {
   event.preventDefault();
@@ -14,11 +12,13 @@ $("#search-btn").on("click", function(event) {
   // Input validation
   if (userInput.length > 4) {
     // Calling functions to create cards and clear input
-    renderCards();
+    renderCards(userInput);
     clearInput();
+    clearWeather();
   } else {
     alert("Please enter a proper zip code");
     clearInput();
+    clearWeather();
   }
 });
 
@@ -27,9 +27,17 @@ function clearInput() {
   $("#search-input").val("");
 }
 
+function clearWeather() {
+  // clears input area for next entry
+  $(".city").text("");
+  $(".wind").text("");
+  $(".clouds").text("");
+  $(".temp").text("");
+}
+
 // BEGIN YELP API //
 
-function renderCards() {
+function renderCards(zipcode) {
   var where = userInput;
   console.log("where: " + where);
 
@@ -86,7 +94,7 @@ function renderCards() {
       var address = resortsArray[i].location.address1;
 
       var card = $("<div>");
-      card.addClass("card border-info mb-3 form-rounded m-3 mx-auto width");
+      card.addClass("card border-info mb-3 form-rounded m-3 width");
 
       var cardHeader = $("<div>");
       cardHeader.addClass("card-header form-rounded");
@@ -116,6 +124,8 @@ function renderCards() {
       cardButton.text("Get Weather");
       cardButton.addClass("btn btn-primary form-rounded");
       cardButton.attr("id", "weather-btn");
+      cardButton.attr("lat", latitude);
+      cardButton.attr("lon", longitude);
 
       cardBody.append(cardImage);
       cardBody.append(title);
@@ -136,8 +146,8 @@ function renderWeather() {
   var APIKey = "51deb09fc20d171f26bffd5637e7878c";
 
   // This will need to pull the lat/lon from the object associated with the card
-  var latCoord = "40";
-  var lonCoord = "75";
+  var latCoord = $(this).attr("lat");
+  var lonCoord = $(this).attr("lon");
 
   // Here we are building the URL we need to query the database
   var queryURL =
@@ -155,6 +165,7 @@ function renderWeather() {
   })
     // We store all of the retrieved data inside of an object called "response"
     .then(function(response) {
+      $('#weatherDiv').show();
       // Log the resulting object
       console.log(response);
       $("#resort-cards").empty();
@@ -164,15 +175,14 @@ function renderWeather() {
       console.log("f temp: " + tempF);
       // Converting meters/sec to miles/hour (wind)
       var milesHr = response.wind.speed * 2.237;
-      console.log("mph: " + milesHr);
 
       // Transfer content to HTML
       $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-      $(".wind").text("Wind Speed: " + tempF.toFixed(2) + " MPH");
+      $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
       $(".clouds").text("Clouds: " + response.clouds.all + "%");
       $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
       // Log the data in the console as well
-      console.log("Wind Speed: " + response.wind.speed);
+      console.log("Wind Speed: " + milesHr.toFixed(2));
       console.log("Humidity: " + response.main.humidity);
       console.log("Temperature (F): " + response.main.temp);
     });
@@ -180,5 +190,3 @@ function renderWeather() {
 
 // // When cards with a id of 'resort-card' are clicked, call the displayWeather function
 $(document).on("click", "#weather-btn", renderWeather);
-
-// renderWeather();

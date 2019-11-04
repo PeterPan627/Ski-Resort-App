@@ -10,6 +10,7 @@ h5{
 header {
   background-image: url(../images/header1.png);
   background-size: cover;
+  min-height: 200px;
 }
 footer {
   text-align: center;
@@ -27,6 +28,8 @@ body {
 
 #search-btn {
     font-weight: bold;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #searchBar {
@@ -34,7 +37,8 @@ body {
 }
 
 #search-input {
-  padding-left: 300px;
+  padding-left: 640px;
+  float: right;
 }
 
 .width {
@@ -47,4 +51,12 @@ body {
 .jumbotron {
   border-width: 10px;
   border-color: lightblue;
+}
+
+#mainContainer {
+  min-height: 1000px;
+}
+
+#weatherDiv{
+  display: none;
 }
