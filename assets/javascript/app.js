@@ -29,10 +29,8 @@ function clearInput() {
 
 function clearWeather() {
   // clears input area for next entry
-  $(".city").text("");
-  $(".wind").text("");
-  $(".clouds").text("");
-  $(".temp").text("");
+  $('#weatherDiv').hide();
+
 }
 
 // BEGIN YELP API //
@@ -198,7 +196,7 @@ function renderWeather() {
       $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
       $(".clouds").text("Clouds: " + response.clouds.all + "%");
       $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
-      $(".description").html(response.weather[0].description).prepend(iconImage);
+      $(".description").text(response.weather[0].description).prepend(iconImage);
     
     });
 }
@@ -207,4 +205,4 @@ function renderWeather() {
 $(document).on("click", "#weather-btn", renderWeather);
 // $(document).on("click", "#resort-card", renderWeather);
 
-renderWeather();
+
