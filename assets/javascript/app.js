@@ -1,10 +1,13 @@
 var userInput;
 $('#weatherDiv').hide();
+$("#loading").hide();
+
 // This function handles events where SEARCH button is clicked
 $("#search-btn").on("click", function (event) {
   event.preventDefault();
   
   $("#resortsDiv").empty();
+  $("#loading").show();
 
   // This line will grab the text from the input box
   userInput = $("#search-input")
@@ -69,6 +72,7 @@ function renderCards(zipcode) {
     var results = response.businesses;
 
     $("#resortsDiv").empty();
+    $("#loading").hide();
 
     // First for-loop will loop through results and add businesses into resortsArray IF they match alias: skiresorts
     for (var i = 0; i < results.length; i++) {
@@ -169,7 +173,10 @@ function renderCards(zipcode) {
       card.append(cardHeader);
       card.append(cardBody);
 
+
       $("#resortsDiv").append(card);
+      $("#loading").hide();
+
     }
   });
 
