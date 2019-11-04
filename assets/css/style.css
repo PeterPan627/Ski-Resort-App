@@ -4,8 +4,8 @@ h1 {
   padding: 25px 0px 10px 0px;
   font-weight: bold;
 }
-h5{
-    text-align: center;
+h5 {
+  text-align: center;
 }
 header {
   background-image: url(../images/header1.png);
@@ -34,19 +34,14 @@ body {
   justify-content: center;
 }
 
-
 #searchBar {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 #search-input {
-  /* padding-right: 600px;
-  padding-left: 30px;
-  float: right; */
   height: 40px;
   padding: 0 20px;
   font-size: 18pt;
-
 }
 
 .width {
@@ -66,28 +61,23 @@ body {
   margin: 20px;
   border-style: solid;
   background-color: white;
-  /* background-color: lightblue;
-  background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png"); */
-
-
-
 }
 
 #mainContainer {
   min-height: 1000px;
 }
 
-#weatherDiv{
+#weatherDiv {
   display: none;
 }
 
 #resortsDiv {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin: 30px;
 }
 
-.btn { 
+.btn {
   padding: 8px 12px;
   font-size: 16pt;
 }
@@ -110,4 +100,21 @@ body {
 .fa-star {
   color: orange;
   font-size: 16px;
+}
+
+#sort-buttons-div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#sort-rating {
+  font-weight: bold;
+  margin: 10px;
+  font-size: 18px;
+}
+
+#sort-default {
+  font-weight: bold;
+  margin: 10px;
+  font-size: 18px;
 }
