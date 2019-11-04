@@ -96,9 +96,13 @@ function renderCards(zipcode) {
       var card = $("<div>");
       card.addClass("card border-info mb-3 form-rounded m-3 width");
 
+    
+
       var cardHeader = $("<div>");
       cardHeader.addClass("card-header form-rounded");
-      cardHeader.text("Rating: " + rating);
+      cardHeader.text("Rating: " + rating + " ");
+  
+      cardHeader.append("<i class='fa fa-star'></i>");
 
       var cardImage = $("<img>");
       cardImage.addClass("card-img-top mb-3");

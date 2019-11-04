@@ -25,20 +25,28 @@ footer {
 body {
   font-family: "Rajdhani", sans-serif;
 }
-
-#search-btn {
-    font-weight: bold;
-    padding-left: 15px;
-    padding-right: 15px;
+.navbar-brand {
+  font-size: 18pt;
 }
 
+#navItem {
+  display: flex;
+  justify-content: center;
+}
+
+
 #searchBar {
-    padding-left: 25px;
+    padding-left: 0;
 }
 
 #search-input {
-  padding-left: 640px;
-  float: right;
+  /* padding-right: 600px;
+  padding-left: 30px;
+  float: right; */
+  height: 40px;
+  padding: 0 20px;
+  font-size: 18pt;
+
 }
 
 .width {
@@ -48,9 +56,20 @@ body {
 .form-rounded {
   border-radius: 1rem;
 }
+
 .jumbotron {
-  border-width: 10px;
+  border-width: 1px;
   border-color: lightblue;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 30px;
+  margin: 20px;
+  border-style: solid;
+  /* background-color: lightblue;
+  background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png"); */
+
+
+
 }
 
 #mainContainer {
@@ -59,4 +78,35 @@ body {
 
 #weatherDiv{
   display: none;
+}
+
+#resortsDiv {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.btn { 
+  padding: 8px 12px;
+  font-size: 16pt;
+}
+
+#search-btn {
+  font-weight: bold;
+  padding: 4px 15px 4px 15px;
+  font-size: 14pt;
+}
+
+.card-text {
+  font-size: 13pt;
+}
+
+.card-header {
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.fa-star {
+  color: orange;
+  font-size: 16px;
 }
