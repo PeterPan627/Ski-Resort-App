@@ -80,6 +80,7 @@ function renderCards(zipcode) {
       }
     }
 
+    //saves the original results in a global variable so they can be displayed again later
     resultsOriginal = resortsArr.slice(0);
 
     console.log("resultsOriginal:");
@@ -248,11 +249,13 @@ function resortsDisplay(resortsArray, numResults) {
   }
 }
 
+//on click function when the user clicks "Sort By Rating"
 $(document).on("click", "#sort-rating", function () {
   console.log("The on click worked!");
   resortsDisplay(sortedArr, 6);
 });
 
+//on click function when the user clicks "Default Results"
 $(document).on("click", "#sort-default", function () {
   console.log("The on click worked!");
   resortsDisplay(resultsOriginal, 6);
