@@ -42,6 +42,7 @@ function clearWeather() {
 // Here we have an empty array to push the results into IF they match 'alias: "skiresorts"
 var resortsArr = [];
 var sortedArr = [];
+var resultsOriginal = [];
 
 function renderCards(zipcode) {
   var where = userInput;
@@ -79,7 +80,7 @@ function renderCards(zipcode) {
       }
     }
 
-    var resultsOriginal = resortsArr.slice(0);
+    resultsOriginal = resortsArr.slice(0);
 
     console.log("resultsOriginal:");
     console.log(resultsOriginal);
@@ -250,9 +251,15 @@ function resortsDisplay(resortsArray, numResults) {
 $(document).on("click", "#sort-rating", function () {
   console.log("The on click worked!");
   resortsDisplay(sortedArr, 6);
-  
-
 });
+
+$(document).on("click", "#sort-default", function () {
+  console.log("The on click worked!");
+  resortsDisplay(resultsOriginal, 6);
+});
+
+
+
 
 //Sort by rating function
 function compare(a, b) {
