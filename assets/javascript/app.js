@@ -94,7 +94,11 @@ function renderCards(zipcode) {
       var address = resortsArray[i].location.address1;
 
       var card = $("<div>");
+<<<<<<< HEAD
       card.addClass("card border-info mb-3 form-rounded m-3 width");
+=======
+      card.addClass("card border-info mb-3 form-rounded m-3");
+>>>>>>> 981cffc0026a8f32191a3ac1480e936473c20c86
 
       var cardHeader = $("<div>");
       cardHeader.addClass("card-header form-rounded");
@@ -107,6 +111,7 @@ function renderCards(zipcode) {
 
       var cardBody = $("<div>");
       cardBody.addClass("card-body");
+      cardBody.attr("id", "resort-card");
 
       var title = $("<h4>");
       title.text(name);
@@ -144,10 +149,16 @@ function renderCards(zipcode) {
 
 function renderWeather() {
   var APIKey = "51deb09fc20d171f26bffd5637e7878c";
+<<<<<<< HEAD
 
   // This will need to pull the lat/lon from the object associated with the card
   var latCoord = $(this).attr("lat");
   var lonCoord = $(this).attr("lon");
+=======
+  // This will be the user input postal code
+  var latCoord = "40";
+  var lonCoord = "75";
+>>>>>>> 981cffc0026a8f32191a3ac1480e936473c20c86
 
   // Here we are building the URL we need to query the database
   var queryURL =
@@ -165,7 +176,10 @@ function renderWeather() {
   })
     // We store all of the retrieved data inside of an object called "response"
     .then(function(response) {
+<<<<<<< HEAD
       $('#weatherDiv').show();
+=======
+>>>>>>> 981cffc0026a8f32191a3ac1480e936473c20c86
       // Log the resulting object
       console.log(response);
       $("#resort-cards").empty();
@@ -174,6 +188,7 @@ function renderWeather() {
       var tempF = (tempK - 273.15) * 1.8 + 32;
       console.log("f temp: " + tempF);
       // Converting meters/sec to miles/hour (wind)
+<<<<<<< HEAD
       var milesHr = response.wind.speed * 2.237;
 
       // Transfer content to HTML
@@ -183,10 +198,32 @@ function renderWeather() {
       $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
       // Log the data in the console as well
       console.log("Wind Speed: " + milesHr.toFixed(2));
+=======
+      var metSec = response.wind.speed;
+      var milesHr = response.wind.speed * 2.237;
+      console.log("mph: " + milesHr);
+      // Making a new card
+      var newDiv = $("<div>");
+      // Add bootstrap class to card
+      // Insert weather data into card
+      // Transfer content to HTML
+      $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+      $(".wind").text("Wind Speed: " + tempF.toFixed(2) + " MPH");
+      $(".clouds").text("Clouds: " + response.clouds.all + "%");
+      $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
+      // Log the data in the console as well
+      console.log("Wind Speed: " + response.wind.speed);
+>>>>>>> 981cffc0026a8f32191a3ac1480e936473c20c86
       console.log("Humidity: " + response.main.humidity);
       console.log("Temperature (F): " + response.main.temp);
     });
 }
 
 // // When cards with a id of 'resort-card' are clicked, call the displayWeather function
+<<<<<<< HEAD
 $(document).on("click", "#weather-btn", renderWeather);
+=======
+// $(document).on("click", "#resort-card", renderWeather);
+
+renderWeather();
+>>>>>>> 981cffc0026a8f32191a3ac1480e936473c20c86
