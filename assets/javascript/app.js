@@ -29,10 +29,8 @@ function clearInput() {
 
 function clearWeather() {
   // clears input area for next entry
-  $(".city").text("");
-  $(".wind").text("");
-  $(".clouds").text("");
-  $(".temp").text("");
+  $('#weatherDiv').hide();
+
 }
 
 // BEGIN YELP API //
@@ -96,9 +94,13 @@ function renderCards(zipcode) {
       var card = $("<div>");
       card.addClass("card border-info mb-3 form-rounded m-3 width");
 
+    
+
       var cardHeader = $("<div>");
       cardHeader.addClass("card-header form-rounded");
-      cardHeader.text("Rating: " + rating);
+      cardHeader.text("Rating: " + rating + " ");
+  
+      cardHeader.append("<i class='fa fa-star'></i>");
 
       var cardImage = $("<img>");
       cardImage.addClass("card-img-top mb-3");
@@ -174,33 +176,28 @@ function renderWeather() {
       var tempK = response.main.temp;
       var tempF = (tempK - 273.15) * 1.8 + 32;
       console.log("f temp: " + tempF);
+
       // Converting meters/sec to miles/hour (wind)
-
-      var milesHr = response.wind.speed * 2.237;
-
-      // Transfer content to HTML
-      $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-      $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
-      $(".clouds").text("Clouds: " + response.clouds.all + "%");
-      $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
-      // Log the data in the console as well
-      console.log("Wind Speed: " + milesHr.toFixed(2));
-      var metSec = response.wind.speed;
       var milesHr = response.wind.speed * 2.237;
       console.log("mph: " + milesHr);
+
+      var weatherIcon = response.weather[0].icon;
+      console.log("weather icon " + weatherIcon);
+
+      var iconImage = $("<img>");
+      iconImage.attr("src", "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+
       // Making a new card
       var newDiv = $("<div>");
       // Add bootstrap class to card
       // Insert weather data into card
       // Transfer content to HTML
       $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-      $(".wind").text("Wind Speed: " + tempF.toFixed(2) + " MPH");
+      $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
       $(".clouds").text("Clouds: " + response.clouds.all + "%");
       $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
-      // Log the data in the console as well
-      console.log("Wind Speed: " + response.wind.speed);
-      console.log("Humidity: " + response.main.humidity);
-      console.log("Temperature (F): " + response.main.temp);
+      $(".description").text(response.weather[0].description).prepend(iconImage);
+    
     });
 }
 
@@ -208,4 +205,4 @@ function renderWeather() {
 $(document).on("click", "#weather-btn", renderWeather);
 // $(document).on("click", "#resort-card", renderWeather);
 
-renderWeather();
+

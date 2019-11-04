@@ -22,7 +22,7 @@
             <h1><i class="fas fa-snowflake"></i>     Ski Conditions</h1>
             <h5>find your local ski resorts forecast</h5>
         </header>
-        <nav class="sticky-top navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="navItem" class="sticky-top navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Find Your Local Resort:</a>
           
             <form class="form-inline my-2 my-lg-0" id="searchBar">
@@ -32,47 +32,31 @@
                 </button>
             </form>
         </nav>
+        
+        <div id="weatherDiv" class="container hide mb-5">
+                <div class="jumbotron form-rounded mx-auto">
+                    <p class="lead">
+                        <div class="city"></div>
+                        <div class="description"></div>
+                    </p>
+                    <hr class="my-4">
+                    <p class="lead">
+                        <div class="wind"></div>
+                        <div class="clouds"></div>
+                        <div class="temp"></div>
+                    </p>
+                </div>
+            
+            </div>
 
         <div id="resortsDiv" class="row mb-5 mt-5 mx-auto">
             <div class="col-lg-4"></div>
             <div class="col-lg-4"></div>
             <div class="col-lg-4"></div>
         </div>
-        <div id="resortsDiv" class="row mb-5 mt-5 mx-auto">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4"></div>
-        </div>
+       
 
-        <div id="weatherDiv" class="container bg-light hide">
-            <div class="jumbotron form-rounded border-info mx-auto mb-5">
-        <div class="container">
-            <div id="resortsDiv" class="row mb-5 mt-5 mx-auto">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-            </div>
-            <div id="resortsDiv" class="row mb-5 mt-5 mx-auto">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-            </div>
-
-            <div id="weatherDiv" class="container bg-light"></div>
-            <div class="jumbotron">
-
-                <p class="lead">
-                    <div class="city"></div>
-                </p>
-                <hr class="my-4">
-                <p class="lead">
-                    <div class="wind"></div>
-                    <div class="clouds"></div>
-                    <div class="temp"></div>
-                </p>
-            </div>
-        </div>
-        </div>
+      
     </div>
 
     <footer class="fixed-bottom bg-light">
