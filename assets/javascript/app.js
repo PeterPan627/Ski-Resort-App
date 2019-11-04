@@ -206,7 +206,7 @@ function renderWeather() {
       console.log(response);
       $("#resort-cards").empty();
       
-  $("#resortsDiv").empty();
+  // $("#resortsDiv").empty();
       // Converting Kelvin to Farenheit
       var tempK = response.main.temp;
       var tempF = (tempK - 273.15) * 1.8 + 32;
