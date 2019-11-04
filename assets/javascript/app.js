@@ -178,33 +178,28 @@ function renderWeather() {
       var tempK = response.main.temp;
       var tempF = (tempK - 273.15) * 1.8 + 32;
       console.log("f temp: " + tempF);
+
       // Converting meters/sec to miles/hour (wind)
-
-      var milesHr = response.wind.speed * 2.237;
-
-      // Transfer content to HTML
-      $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-      $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
-      $(".clouds").text("Clouds: " + response.clouds.all + "%");
-      $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
-      // Log the data in the console as well
-      console.log("Wind Speed: " + milesHr.toFixed(2));
-      var metSec = response.wind.speed;
       var milesHr = response.wind.speed * 2.237;
       console.log("mph: " + milesHr);
+
+      var weatherIcon = response.weather[0].icon;
+      console.log("weather icon " + weatherIcon);
+
+      var iconImage = $("<img>");
+      iconImage.attr("src", "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+
       // Making a new card
       var newDiv = $("<div>");
       // Add bootstrap class to card
       // Insert weather data into card
       // Transfer content to HTML
       $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-      $(".wind").text("Wind Speed: " + tempF.toFixed(2) + " MPH");
+      $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
       $(".clouds").text("Clouds: " + response.clouds.all + "%");
       $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
-      // Log the data in the console as well
-      console.log("Wind Speed: " + response.wind.speed);
-      console.log("Humidity: " + response.main.humidity);
-      console.log("Temperature (F): " + response.main.temp);
+      $(".description").html(response.weather[0].description).prepend(iconImage);
+    
     });
 }
 
