@@ -19,59 +19,57 @@
 <body>
     <div id="mainContainer" class="container">
         <header>
-            <h1><i class="fas fa-snowflake"></i>     Ski Conditions</h1>
-            <h5>find your local ski resorts forecast</h5>
+            <h1><i class="fas fa-snowflake"></i> Ski Conditions</h1>
+            <h5>find your local ski resorts' forecast</h5>
         </header>
-        <nav id="navItem" class="sticky-top navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="navItem" class="sticky-top navbar navbar-expand-lg navbar-light bg-light mb-1">
             <a class="navbar-brand" href="#">Find Your Local Resort:</a>
-          
+
             <form class="form-inline my-2 my-lg-0" id="searchBar">
-                <input class="form-control mr-sm-2 form-rounded" type="text" placeholder="zip code" id="search-input"/>
+                <input class="form-control mr-sm-2 form-rounded" type="text" placeholder="zip code" id="search-input" />
                 <button class="btn btn-info my-2 my-sm-0 form-rounded" type="submit" id="search-btn">
                     Search
                 </button>
             </form>
-
-            <button id="sort-rating">Sort By Rating</button>
-            <button id="sort-default">Default Results</button>
         </nav>
 
-        <div id="loading">
-            <img src="assets/images/313.gif" class="center"></img>
-        </div>
-        
-        <div id="weatherDiv" class="container hide mb-5">
-                <div class="jumbotron form-rounded mx-auto">
-                    <p class="lead">
-                        <div class="city"></div>
-                        <div class="description"></div>
-                    </p>
-                    <hr class="my-4">
-                    <p class="lead">
-                        <div class="wind"></div>
-                        <div class="clouds"></div>
-                        <div class="temp"></div>
-                    </p>
-                </div>
-            
+        <div id="weatherDiv" class="container hide mb-2">
+            <div class="jumbotron form-rounded mx-auto">
+                <p class="lead">
+                    <div class="city"></div>
+                    <div class="description"></div>
+                </p>
+                <hr class="my-4">
+                <p class="lead">
+                    <div class="wind"></div>
+                    <div class="clouds"></div>
+                    <div class="temp"></div>
+                </p>
             </div>
 
-        <div id="resortsDiv" class="row mb-5 mt-5 mx-auto">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4"></div>
         </div>
-       
 
-      
+        <div class="container">
+            <div id="sort-buttons-div">
+                <button id="sort-rating" class="btn btn-secondary form-rounded">Sort By Rating</button>
+                <button id="sort-default" class="btn btn-secondary form-rounded">Default Results</button>
+            </div>
+
+
+        <div id="loading">
+                <img src="assets/images/313.gif" class="center"></img>
+            </div>
+
+            <div id="resortsDiv" class="row mb-5 mt-1 mx-auto">
+
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+
+
     </div>
-
-    <footer class="fixed-bottom bg-light">
-        
-        <img src="assets/images/amd.jpg" class="amd" height="15px" width="15px"></img>
-        <br>
-        powered by: AnaMelissaDave
-    </footer>
 
 
 
@@ -81,7 +79,6 @@
 
     <!-- Script -->
     <script src="assets/javascript/app.js"></script>
-
 
 </body>
 
