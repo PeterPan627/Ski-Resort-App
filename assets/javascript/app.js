@@ -129,7 +129,6 @@ function renderCards(zipcode) {
 
       var cardBody = $("<div>");
       cardBody.addClass("card-body");
-      cardBody.attr("id", "resort-card");
 
       var title = $("<h4>");
       title.text(name);
