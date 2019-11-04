@@ -17,6 +17,7 @@ h1 {
   color: grey;
   padding: 25px 0px 10px 0px;
   font-weight: bold;
+  font-size: 60px;
 }
 
 h5 {
@@ -76,6 +77,8 @@ body {
   margin: 20px;
   border-style: solid;
   background-color: white;
+  /* background-color: lightblue;
+  background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png"); */
 }
 
 #mainContainer {
@@ -117,6 +120,13 @@ body {
   font-size: 16px;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+  margin-top: 150px;
+}
 #sort-buttons-div {
   display: flex;
   justify-content: flex-end;
