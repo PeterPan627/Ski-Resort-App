@@ -1,9 +1,9 @@
 var userInput;
-$('#weatherDiv').hide();
+$("#weatherDiv").hide();
 // This function handles events where SEARCH button is clicked
-$("#search-btn").on("click", function (event) {
+$("#search-btn").on("click", function(event) {
   event.preventDefault();
-  
+
   $("#resortsDiv").empty();
 
   // This line will grab the text from the input box
@@ -31,8 +31,7 @@ function clearInput() {
 
 function clearWeather() {
   // clears input area for next entry
-  $('#weatherDiv').hide();
-
+  $("#weatherDiv").hide();
 }
 
 // BEGIN YELP API //
@@ -50,7 +49,6 @@ function renderCards(zipcode) {
   sortedArr = [];
   resortsArr = [];
 
-
   var queryURL =
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" +
     where +
@@ -63,7 +61,7 @@ function renderCards(zipcode) {
       Authorization:
         "Bearer K5vhwq6zYBL4NEpBTf2KN1b7BKB3P1ofVlp_BVJxNVWTxOZpQT05QQv3qKrYyW0hu7sHEBbtd-fVHpx3nu3bGtp2OjcJVUVC8isF-RlthbBF_2ZoJYUWAGHGzRe7XXYx"
     }
-  }).then(function (response) {
+  }).then(function(response) {
     // console.log(response);
 
     var results = response.businesses;
@@ -88,19 +86,12 @@ function renderCards(zipcode) {
 
     console.log("Some text");
 
-
     //calling sortByRating function (test)
     sortedArr = sortByRating(resortsArr);
-
-
 
     resortsDisplay(resultsOriginal, numResult);
 
     // Second for-loop will loop through resortsArray and dynamically create cards for the first 6 results
-
-    
-
-
 
     console.log(resortsArray);
 
@@ -125,12 +116,10 @@ function renderCards(zipcode) {
       var card = $("<div>");
       card.addClass("card border-info mb-3 form-rounded m-3 width");
 
-    
-
       var cardHeader = $("<div>");
       cardHeader.addClass("card-header form-rounded");
       cardHeader.text("Rating: " + rating + " ");
-  
+
       cardHeader.append("<i class='fa fa-star'></i>");
 
       var cardImage = $("<img>");
@@ -140,7 +129,6 @@ function renderCards(zipcode) {
 
       var cardBody = $("<div>");
       cardBody.addClass("card-body");
-      cardBody.attr("id", "resort-card");
 
       var title = $("<h4>");
       title.text(name);
@@ -172,8 +160,6 @@ function renderCards(zipcode) {
       $("#resortsDiv").append(card);
     }
   });
-
-
 }
 
 // BEGIN WEATHER API //
@@ -200,13 +186,13 @@ function renderWeather() {
     method: "GET"
   })
     // We store all of the retrieved data inside of an object called "response"
-    .then(function (response) {
-      $('#weatherDiv').show();
+    .then(function(response) {
+      $("#weatherDiv").show();
       // Log the resulting object
       console.log(response);
       $("#resort-cards").empty();
-      
-  // $("#resortsDiv").empty();
+
+      // $("#resortsDiv").empty();
       // Converting Kelvin to Farenheit
       var tempK = response.main.temp;
       var tempF = (tempK - 273.15) * 1.8 + 32;
@@ -220,7 +206,10 @@ function renderWeather() {
       console.log("weather icon " + weatherIcon);
 
       var iconImage = $("<img>");
-      iconImage.attr("src", "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+      iconImage.attr(
+        "src",
+        "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
+      );
 
       // Making a new card
       var newDiv = $("<div>");
@@ -231,20 +220,19 @@ function renderWeather() {
       $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
       $(".clouds").text("Clouds: " + response.clouds.all + "%");
       $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
-      $(".description").text(response.weather[0].description).prepend(iconImage);
-    
+      $(".description")
+        .text(response.weather[0].description)
+        .prepend(iconImage);
     });
-
 }
 
 // // When cards with a id of 'resort-card' are clicked, call the displayWeather function
 $(document).on("click", "#weather-btn", renderWeather);
 // $(document).on("click", "#resort-card", renderWeather);
 function resortsDisplay(resortsArray, numResults) {
-  
   $("#resortsDiv").empty();
 
-  if(resortsArray.length<numResults){
+  if (resortsArray.length < numResults) {
     numResults = resortsArray.length;
   }
 
@@ -312,19 +300,16 @@ function resortsDisplay(resortsArray, numResults) {
 }
 
 //on click function when the user clicks "Sort By Rating"
-$(document).on("click", "#sort-rating", function () {
+$(document).on("click", "#sort-rating", function() {
   console.log("The on click worked!");
   resortsDisplay(sortedArr, 6);
 });
 
 //on click function when the user clicks "Default Results"
-$(document).on("click", "#sort-default", function () {
+$(document).on("click", "#sort-default", function() {
   console.log("The on click worked!");
   resortsDisplay(resultsOriginal, 6);
 });
-
-
-
 
 //Sort by rating function
 function compare(a, b) {
@@ -343,10 +328,10 @@ function sortByRating(resultsArray) {
   for (var i = 0; i < resultsArray.length; i++) {
     console.log("resultsArray[" + i + "] is ");
     console.log(resultsArray[i]);
-    console.log("Rating of " + resultsArray[i].name + " is " + resultsArray[i].rating);
+    console.log(
+      "Rating of " + resultsArray[i].name + " is " + resultsArray[i].rating
+    );
   }
-
-
 
   var sortedArray = resultsArray;
   sortedArray.sort(compare);
@@ -359,7 +344,5 @@ function sortByRating(resultsArray) {
 
   console.log(sortedArray);
 
-
   return resultsArray;
-
 }
