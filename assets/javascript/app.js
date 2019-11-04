@@ -1,7 +1,7 @@
 var userInput;
 $('#weatherDiv').hide();
 // This function handles events where SEARCH button is clicked
-$("#search-btn").on("click", function(event) {
+$("#search-btn").on("click", function (event) {
   event.preventDefault();
 
   // This line will grab the text from the input box
@@ -37,14 +37,15 @@ function clearWeather() {
 
 // BEGIN YELP API //
 
+// Here we have an empty array to push the results into IF they match 'alias: "skiresorts"
+var resortsArr = [];
+
 function renderCards(zipcode) {
   var where = userInput;
   console.log("where: " + where);
 
-  var numResults = 6;
+  var numResult = 6;
 
-  // Here we have an empty array to push the results into IF they match 'alias: "skiresorts"
-  var resortsArray = [];
 
   var queryURL =
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" +
@@ -58,7 +59,7 @@ function renderCards(zipcode) {
       Authorization:
         "Bearer K5vhwq6zYBL4NEpBTf2KN1b7BKB3P1ofVlp_BVJxNVWTxOZpQT05QQv3qKrYyW0hu7sHEBbtd-fVHpx3nu3bGtp2OjcJVUVC8isF-RlthbBF_2ZoJYUWAGHGzRe7XXYx"
     }
-  }).then(function(response) {
+  }).then(function (response) {
     // console.log(response);
 
     var results = response.businesses;
@@ -69,76 +70,36 @@ function renderCards(zipcode) {
     for (var i = 0; i < results.length; i++) {
       if (results[i].categories[0].alias === "skiresorts") {
         console.log("omg this matches");
-        resortsArray.push(results[i]);
+        resortsArr.push(results[i]);
       }
     }
 
-    console.log(resortsArray);
+    var resultsOriginal = resortsArr.slice(0);
 
-    // Second for-loop will loop through resortsArray and dynamically create cards for the first 3 results
+    console.log("resultsOriginal:");
+    console.log(resultsOriginal);
 
-    for (var i = 0; i < numResults; i++) {
-      console.log(resortsArray[i]);
-      var name = resortsArray[i].name;
-      console.log("name: " + name);
-      var longitude = resortsArray[i].coordinates.longitude;
-      // console.log("long: " + longitude);
-      var latitude = resortsArray[i].coordinates.latitude;
-      // console.log("lat: " + latitude);
-      var imageURL = resortsArray[i].image_url;
-      // console.log("img url: " + imageURL);
-      var phone = resortsArray[i].display_phone;
-      // console.log("phone: " + phone);
-      var rating = resortsArray[i].rating;
-      // console.log("rating: " + rating);
-      var address = resortsArray[i].location.address1;
+    console.log(resortsArr);
 
-      var card = $("<div>");
-      card.addClass("card border-info mb-3 form-rounded m-3 width");
+    console.log("Some text");
 
-      var cardHeader = $("<div>");
-      cardHeader.addClass("card-header form-rounded");
-      cardHeader.text("Rating: " + rating);
 
-      var cardImage = $("<img>");
-      cardImage.addClass("card-img-top mb-3");
-      cardImage.attr("src", imageURL);
-      cardImage.attr("id", "card-img");
+    //calling sortByRating function (test)
+    var resortsByRating = sortByRating(resortsArr);
 
-      var cardBody = $("<div>");
-      cardBody.addClass("card-body");
-      cardBody.attr("id", "resort-card");
 
-      var title = $("<h4>");
-      title.text(name);
-      title.addClass("card-title");
 
-      var paragraph1 = $("<p>");
-      paragraph1.text(address);
-      paragraph1.addClass("card-text");
+    resortsDisplay(resultsOriginal, numResult);
 
-      var paragraph2 = $("<p>");
-      paragraph2.text(phone);
-      paragraph2.addClass("card-text");
+    // Second for-loop will loop through resortsArray and dynamically create cards for the first 6 results
 
-      var cardButton = $("<button>");
-      cardButton.text("Get Weather");
-      cardButton.addClass("btn btn-primary form-rounded");
-      cardButton.attr("id", "weather-btn");
-      cardButton.attr("lat", latitude);
-      cardButton.attr("lon", longitude);
+    
 
-      cardBody.append(cardImage);
-      cardBody.append(title);
-      cardBody.append(paragraph1);
-      cardBody.append(paragraph2);
-      cardBody.append(cardButton);
-      card.append(cardHeader);
-      card.append(cardBody);
 
-      $("#resortsDiv").append(card);
-    }
+
   });
+
+
 }
 
 // BEGIN WEATHER API //
@@ -165,7 +126,7 @@ function renderWeather() {
     method: "GET"
   })
     // We store all of the retrieved data inside of an object called "response"
-    .then(function(response) {
+    .then(function (response) {
       $('#weatherDiv').show();
       // Log the resulting object
       console.log(response);
@@ -202,10 +163,116 @@ function renderWeather() {
       console.log("Humidity: " + response.main.humidity);
       console.log("Temperature (F): " + response.main.temp);
     });
+
 }
 
 // // When cards with a id of 'resort-card' are clicked, call the displayWeather function
 $(document).on("click", "#weather-btn", renderWeather);
 // $(document).on("click", "#resort-card", renderWeather);
+function resortsDisplay(resortsArray, numResults) {
 
-renderWeather();
+  for (var i = 0; i < numResults; i++) {
+    console.log(resortsArray[i]);
+    var name = resortsArray[i].name;
+    console.log("name: " + name);
+    var longitude = resortsArray[i].coordinates.longitude;
+    // console.log("long: " + longitude);
+    var latitude = resortsArray[i].coordinates.latitude;
+    // console.log("lat: " + latitude);
+    var imageURL = resortsArray[i].image_url;
+    // console.log("img url: " + imageURL);
+    var phone = resortsArray[i].display_phone;
+    // console.log("phone: " + phone);
+    var rating = resortsArray[i].rating;
+    // console.log("rating: " + rating);
+    var address = resortsArray[i].location.address1;
+
+    var card = $("<div>");
+    card.addClass("card border-info mb-3 form-rounded m-3 width");
+
+    var cardHeader = $("<div>");
+    cardHeader.addClass("card-header form-rounded");
+    cardHeader.text("Rating: " + rating);
+
+    var cardImage = $("<img>");
+    cardImage.addClass("card-img-top mb-3");
+    cardImage.attr("src", imageURL);
+    cardImage.attr("id", "card-img");
+
+    var cardBody = $("<div>");
+    cardBody.addClass("card-body");
+    cardBody.attr("id", "resort-card");
+
+    var title = $("<h4>");
+    title.text(name);
+    title.addClass("card-title");
+
+    var paragraph1 = $("<p>");
+    paragraph1.text(address);
+    paragraph1.addClass("card-text");
+
+    var paragraph2 = $("<p>");
+    paragraph2.text(phone);
+    paragraph2.addClass("card-text");
+
+    var cardButton = $("<button>");
+    cardButton.text("Get Weather");
+    cardButton.addClass("btn btn-primary form-rounded");
+    cardButton.attr("id", "weather-btn");
+    cardButton.attr("lat", latitude);
+    cardButton.attr("lon", longitude);
+
+    cardBody.append(cardImage);
+    cardBody.append(title);
+    cardBody.append(paragraph1);
+    cardBody.append(paragraph2);
+    cardBody.append(cardButton);
+    card.append(cardHeader);
+    card.append(cardBody);
+
+    $("#resortsDiv").append(card);
+  }
+}
+
+$(document).on("click", "#sort-rating", function () {
+  console.log("The on click worked!");
+
+});
+
+//Sort by rating function
+function compare(a, b) {
+  if (a.rating > b.rating) {
+    return -1;
+  }
+  if (a.rating < b.rating) {
+    return 1;
+  }
+  return 0;
+}
+
+function sortByRating(resultsArray) {
+  console.log("sortByRating was called; resultsArray below");
+  console.log(resultsArray);
+  for (var i = 0; i < resultsArray.length; i++) {
+    console.log("resultsArray[" + i + "] is ");
+    console.log(resultsArray[i]);
+    console.log("Rating of " + resultsArray[i].name + " is " + resultsArray[i].rating);
+  }
+
+
+
+  var sortedArray = resultsArray;
+  sortedArray.sort(compare);
+
+  console.log("Test");
+  console.log("Below is resultsArray");
+  console.log(resultsArray);
+
+  console.log("Below is sortedArray");
+
+  console.log(sortedArray);
+
+
+  return resultsArray;
+
+}
