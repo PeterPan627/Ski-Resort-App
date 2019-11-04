@@ -3,6 +3,8 @@ $('#weatherDiv').hide();
 // This function handles events where SEARCH button is clicked
 $("#search-btn").on("click", function (event) {
   event.preventDefault();
+  
+  $("#resortsDiv").empty();
 
   // This line will grab the text from the input box
   userInput = $("#search-input")
@@ -46,6 +48,8 @@ function renderCards(zipcode) {
   console.log("where: " + where);
 
   var numResult = 6;
+  sortedArr = [];
+  resortsArr = [];
 
 
   var queryURL =
@@ -132,6 +136,8 @@ function renderWeather() {
       // Log the resulting object
       console.log(response);
       $("#resort-cards").empty();
+      
+  $("#resortsDiv").empty();
       // Converting Kelvin to Farenheit
       var tempK = response.main.temp;
       var tempF = (tempK - 273.15) * 1.8 + 32;
@@ -173,6 +179,10 @@ $(document).on("click", "#weather-btn", renderWeather);
 function resortsDisplay(resortsArray, numResults) {
   
   $("#resortsDiv").empty();
+
+  if(resortsArray.length<numResults){
+    numResults = resortsArray.length;
+  }
 
   for (var i = 0; i < numResults; i++) {
     console.log(resortsArray[i]);
