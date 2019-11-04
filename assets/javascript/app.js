@@ -39,6 +39,7 @@ function clearWeather() {
 
 // Here we have an empty array to push the results into IF they match 'alias: "skiresorts"
 var resortsArr = [];
+var sortedArr = [];
 
 function renderCards(zipcode) {
   var where = userInput;
@@ -85,7 +86,7 @@ function renderCards(zipcode) {
 
 
     //calling sortByRating function (test)
-    var resortsByRating = sortByRating(resortsArr);
+    sortedArr = sortByRating(resortsArr);
 
 
 
@@ -170,6 +171,8 @@ function renderWeather() {
 $(document).on("click", "#weather-btn", renderWeather);
 // $(document).on("click", "#resort-card", renderWeather);
 function resortsDisplay(resortsArray, numResults) {
+  
+  $("#resortsDiv").empty();
 
   for (var i = 0; i < numResults; i++) {
     console.log(resortsArray[i]);
@@ -236,6 +239,8 @@ function resortsDisplay(resortsArray, numResults) {
 
 $(document).on("click", "#sort-rating", function () {
   console.log("The on click worked!");
+  resortsDisplay(sortedArr, 6);
+  
 
 });
 
