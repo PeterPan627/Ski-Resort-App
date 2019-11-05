@@ -215,7 +215,7 @@ function renderWeather() {
       var iconImage = $("<img>");
       iconImage.attr(
         "src",
-        "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
+        "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
       );
 
       // Making a new card
