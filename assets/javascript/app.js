@@ -96,72 +96,6 @@ function renderCards(zipcode) {
     sortedArr = sortByRating(resortsArr);
 
     resortsDisplay(resultsOriginal, numResults);
-
-    // Second for-loop will loop through resortsArray and dynamically create cards for the first 6 results
-
-    // Second for-loop will loop through resortsArray and dynamically create cards for the first 3 results
-
-    // for (var i = 0; i < numResults; i++) {
-    //   console.log(resortsArray[i]);
-    //   var name = resortsArray[i].name;
-    //   console.log("name: " + name);
-    //   var longitude = resortsArray[i].coordinates.longitude;
-    //   // console.log("long: " + longitude);
-    //   var latitude = resortsArray[i].coordinates.latitude;
-    //   // console.log("lat: " + latitude);
-    //   var imageURL = resortsArray[i].image_url;
-    //   // console.log("img url: " + imageURL);
-    //   var phone = resortsArray[i].display_phone;
-    //   // console.log("phone: " + phone);
-    //   var rating = resortsArray[i].rating;
-    //   // console.log("rating: " + rating);
-    //   var address = resortsArray[i].location.address1;
-
-    // var card = $("<div>");
-    // card.addClass("card border-info mb-3 form-rounded m-3 width");
-
-    // var cardHeader = $("<div>");
-    // cardHeader.addClass("card-header form-rounded");
-    // cardHeader.text("Rating: " + rating + " ");
-
-    // cardHeader.append('<i class="fa fa-star"></i>');
-
-    // var cardImage = $("<img>");
-    // cardImage.addClass("card-img-top mb-3");
-    // cardImage.attr("src", imageURL);
-    // cardImage.attr("id", "card-img");
-
-    // var cardBody = $("<div>");
-    // cardBody.addClass("card-body");
-
-    // var title = $("<h4>");
-    // title.text(name);
-    // title.addClass("card-title");
-
-    // var paragraph1 = $("<p>");
-    // paragraph1.text(address);
-    // paragraph1.addClass("card-text");
-
-    // var paragraph2 = $("<p>");
-    // paragraph2.text(phone);
-    // paragraph2.addClass("card-text");
-
-    // var cardButton = $("<button>");
-    // cardButton.text("Get Weather");
-    // cardButton.addClass("btn btn-primary form-rounded");
-    // cardButton.attr("id", "weather-btn");
-    // cardButton.attr("lat", latitude);
-    // cardButton.attr("lon", longitude);
-
-    // cardBody.append(cardImage);
-    // cardBody.append(title);
-    // cardBody.append(paragraph1);
-    // cardBody.append(paragraph2);
-    // cardBody.append(cardButton);
-    // card.append(cardHeader);
-    // card.append(cardBody);
-
-    // $("#resortsDiv").append(card);
   });
 }
 
@@ -222,7 +156,7 @@ function renderWeather() {
       $(".city").html("<h1>" + response.name + " Weather Details</h1>");
       $(".wind").text("Wind Speed: " + milesHr.toFixed(2) + " MPH");
       $(".clouds").text("Clouds: " + response.clouds.all + "%");
-      $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
+      $(".temp").text("Temperature: " + tempF.toFixed(2) + "º F");
       $(".description")
         .text(response.weather[0].description)
         .prepend(iconImage);
@@ -261,6 +195,7 @@ function resortsDisplay(resortsArray, numResults) {
     var cardHeader = $("<div>");
     cardHeader.addClass("card-header form-rounded");
     cardHeader.text("Rating: " + rating);
+    cardHeader.append(" <i class='fa fa-star'></i>");
 
     var cardImage = $("<img>");
     cardImage.addClass("card-img-top mb-3");
@@ -285,7 +220,7 @@ function resortsDisplay(resortsArray, numResults) {
 
     var cardButton = $("<button>");
     cardButton.text("Get Weather");
-    cardButton.addClass("btn btn-primary form-rounded");
+    cardButton.addClass("btn btn-info form-rounded");
     cardButton.attr("id", "weather-btn");
     cardButton.attr("lat", latitude);
     cardButton.attr("lon", longitude);
