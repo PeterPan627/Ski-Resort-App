@@ -1,5 +1,5 @@
 var userInput;
-$('#weatherDiv').hide();
+$("#weatherDiv").hide();
 $("#loading").hide();
 
 // This function handles events where SEARCH button is clicked
@@ -40,6 +40,7 @@ function clearWeather() {
 // BEGIN YELP API //
 
 // Here we have an empty array to push the results into IF they match 'alias: "skiresorts"
+
 var resortsArr = [];
 var sortedArr = [];
 var resultsOriginal = [];
@@ -48,7 +49,8 @@ function renderCards(zipcode) {
   var where = userInput;
   console.log("where: " + where);
 
-  var numResult = 6;
+  var numResults = 6;
+  var resortsArray = [];
   sortedArr = [];
   resortsArr = [];
 
@@ -93,79 +95,73 @@ function renderCards(zipcode) {
     //calling sortByRating function (test)
     sortedArr = sortByRating(resortsArr);
 
-    resortsDisplay(resultsOriginal, numResult);
+    resortsDisplay(resultsOriginal, numResults);
 
     // Second for-loop will loop through resortsArray and dynamically create cards for the first 6 results
 
-    console.log(resortsArray);
-
     // Second for-loop will loop through resortsArray and dynamically create cards for the first 3 results
 
-    for (var i = 0; i < numResults; i++) {
-      console.log(resortsArray[i]);
-      var name = resortsArray[i].name;
-      console.log("name: " + name);
-      var longitude = resortsArray[i].coordinates.longitude;
-      // console.log("long: " + longitude);
-      var latitude = resortsArray[i].coordinates.latitude;
-      // console.log("lat: " + latitude);
-      var imageURL = resortsArray[i].image_url;
-      // console.log("img url: " + imageURL);
-      var phone = resortsArray[i].display_phone;
-      // console.log("phone: " + phone);
-      var rating = resortsArray[i].rating;
-      // console.log("rating: " + rating);
-      var address = resortsArray[i].location.address1;
+    // for (var i = 0; i < numResults; i++) {
+    //   console.log(resortsArray[i]);
+    //   var name = resortsArray[i].name;
+    //   console.log("name: " + name);
+    //   var longitude = resortsArray[i].coordinates.longitude;
+    //   // console.log("long: " + longitude);
+    //   var latitude = resortsArray[i].coordinates.latitude;
+    //   // console.log("lat: " + latitude);
+    //   var imageURL = resortsArray[i].image_url;
+    //   // console.log("img url: " + imageURL);
+    //   var phone = resortsArray[i].display_phone;
+    //   // console.log("phone: " + phone);
+    //   var rating = resortsArray[i].rating;
+    //   // console.log("rating: " + rating);
+    //   var address = resortsArray[i].location.address1;
 
-      var card = $("<div>");
-      card.addClass("card border-info mb-3 form-rounded m-3 width");
+    // var card = $("<div>");
+    // card.addClass("card border-info mb-3 form-rounded m-3 width");
 
-      var cardHeader = $("<div>");
-      cardHeader.addClass("card-header form-rounded");
-      cardHeader.text("Rating: " + rating + " ");
+    // var cardHeader = $("<div>");
+    // cardHeader.addClass("card-header form-rounded");
+    // cardHeader.text("Rating: " + rating + " ");
 
-      cardHeader.append("<i class='fa fa-star'></i>");
+    // cardHeader.append('<i class="fa fa-star"></i>');
 
-      var cardImage = $("<img>");
-      cardImage.addClass("card-img-top mb-3");
-      cardImage.attr("src", imageURL);
-      cardImage.attr("id", "card-img");
+    // var cardImage = $("<img>");
+    // cardImage.addClass("card-img-top mb-3");
+    // cardImage.attr("src", imageURL);
+    // cardImage.attr("id", "card-img");
 
-      var cardBody = $("<div>");
-      cardBody.addClass("card-body");
+    // var cardBody = $("<div>");
+    // cardBody.addClass("card-body");
 
-      var title = $("<h4>");
-      title.text(name);
-      title.addClass("card-title");
+    // var title = $("<h4>");
+    // title.text(name);
+    // title.addClass("card-title");
 
-      var paragraph1 = $("<p>");
-      paragraph1.text(address);
-      paragraph1.addClass("card-text");
+    // var paragraph1 = $("<p>");
+    // paragraph1.text(address);
+    // paragraph1.addClass("card-text");
 
-      var paragraph2 = $("<p>");
-      paragraph2.text(phone);
-      paragraph2.addClass("card-text");
+    // var paragraph2 = $("<p>");
+    // paragraph2.text(phone);
+    // paragraph2.addClass("card-text");
 
-      var cardButton = $("<button>");
-      cardButton.text("Get Weather");
-      cardButton.addClass("btn btn-primary form-rounded");
-      cardButton.attr("id", "weather-btn");
-      cardButton.attr("lat", latitude);
-      cardButton.attr("lon", longitude);
+    // var cardButton = $("<button>");
+    // cardButton.text("Get Weather");
+    // cardButton.addClass("btn btn-primary form-rounded");
+    // cardButton.attr("id", "weather-btn");
+    // cardButton.attr("lat", latitude);
+    // cardButton.attr("lon", longitude);
 
-      cardBody.append(cardImage);
-      cardBody.append(title);
-      cardBody.append(paragraph1);
-      cardBody.append(paragraph2);
-      cardBody.append(cardButton);
-      card.append(cardHeader);
-      card.append(cardBody);
+    // cardBody.append(cardImage);
+    // cardBody.append(title);
+    // cardBody.append(paragraph1);
+    // cardBody.append(paragraph2);
+    // cardBody.append(cardButton);
+    // card.append(cardHeader);
+    // card.append(cardBody);
 
-
-      $("#resortsDiv").append(card);
-      $("#loading").hide();
-
-    }
+    // $("#resortsDiv").append(card);
   });
 }
 
@@ -180,7 +176,7 @@ function renderWeather() {
 
   // Here we are building the URL we need to query the database
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/weather?lat=" +
+    "https://api.openweathermap.org/data/2.5/weather?lat=" +
     latCoord +
     "&lon=" +
     lonCoord +
@@ -215,7 +211,7 @@ function renderWeather() {
       var iconImage = $("<img>");
       iconImage.attr(
         "src",
-        "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
+        "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
       );
 
       // Making a new card
@@ -303,6 +299,7 @@ function resortsDisplay(resortsArray, numResults) {
     card.append(cardBody);
 
     $("#resortsDiv").append(card);
+    $("#loading").hide();
   }
 }
 
