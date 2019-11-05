@@ -47,7 +47,6 @@ var resultsOriginal = [];
 
 function renderCards(zipcode) {
   var where = userInput;
-  console.log("where: " + where);
 
   var numResults = 6;
   var resortsArray = [];
@@ -67,8 +66,6 @@ function renderCards(zipcode) {
         "Bearer K5vhwq6zYBL4NEpBTf2KN1b7BKB3P1ofVlp_BVJxNVWTxOZpQT05QQv3qKrYyW0hu7sHEBbtd-fVHpx3nu3bGtp2OjcJVUVC8isF-RlthbBF_2ZoJYUWAGHGzRe7XXYx"
     }
   }).then(function(response) {
-    // console.log(response);
-
     var results = response.businesses;
 
     $("#resortsDiv").empty();
@@ -85,17 +82,14 @@ function renderCards(zipcode) {
     //saves the original results in a global variable so they can be displayed again later
     resultsOriginal = resortsArr.slice(0);
 
-    console.log("resultsOriginal:");
-    console.log(resultsOriginal);
-
-    console.log(resortsArr);
-
-    console.log("Some text");
-
     //calling sortByRating function (test)
     sortedArr = sortByRating(resortsArr);
 
     resortsDisplay(resultsOriginal, numResults);
+
+    if (resortsArr.length == 0) {
+      $("#resortsDiv").text("Sorry, there are no results within 25 miles.");
+    }
   });
 }
 
@@ -116,7 +110,6 @@ function renderWeather() {
     lonCoord +
     "&appid=" +
     APIKey;
-  console.log("url: " + queryURL);
   // Here we run our AJAX call to the OpenWeatherMap API
   $.ajax({
     url: queryURL,
@@ -126,21 +119,17 @@ function renderWeather() {
     .then(function(response) {
       $("#weatherDiv").show();
       // Log the resulting object
-      console.log(response);
       $("#resort-cards").empty();
 
       // $("#resortsDiv").empty();
       // Converting Kelvin to Farenheit
       var tempK = response.main.temp;
       var tempF = (tempK - 273.15) * 1.8 + 32;
-      console.log("f temp: " + tempF);
 
       // Converting meters/sec to miles/hour (wind)
       var milesHr = response.wind.speed * 2.237;
-      console.log("mph: " + milesHr);
 
       var weatherIcon = response.weather[0].icon;
-      console.log("weather icon " + weatherIcon);
 
       var iconImage = $("<img>");
       iconImage.attr(
@@ -174,19 +163,12 @@ function resortsDisplay(resortsArray, numResults) {
   }
 
   for (var i = 0; i < numResults; i++) {
-    console.log(resortsArray[i]);
     var name = resortsArray[i].name;
-    console.log("name: " + name);
     var longitude = resortsArray[i].coordinates.longitude;
-    // console.log("long: " + longitude);
     var latitude = resortsArray[i].coordinates.latitude;
-    // console.log("lat: " + latitude);
     var imageURL = resortsArray[i].image_url;
-    // console.log("img url: " + imageURL);
     var phone = resortsArray[i].display_phone;
-    // console.log("phone: " + phone);
     var rating = resortsArray[i].rating;
-    // console.log("rating: " + rating);
     var address = resortsArray[i].location.address1;
 
     var card = $("<div>");
@@ -240,13 +222,11 @@ function resortsDisplay(resortsArray, numResults) {
 
 //on click function when the user clicks "Sort By Rating"
 $(document).on("click", "#sort-rating", function() {
-  console.log("The on click worked!");
   resortsDisplay(sortedArr, 6);
 });
 
 //on click function when the user clicks "Default Results"
 $(document).on("click", "#sort-default", function() {
-  console.log("The on click worked!");
   resortsDisplay(resultsOriginal, 6);
 });
 
@@ -262,8 +242,6 @@ function compare(a, b) {
 }
 
 function sortByRating(resultsArray) {
-  console.log("sortByRating was called; resultsArray below");
-  console.log(resultsArray);
   for (var i = 0; i < resultsArray.length; i++) {
     console.log("resultsArray[" + i + "] is ");
     console.log(resultsArray[i]);
@@ -274,14 +252,6 @@ function sortByRating(resultsArray) {
 
   var sortedArray = resultsArray;
   sortedArray.sort(compare);
-
-  console.log("Test");
-  console.log("Below is resultsArray");
-  console.log(resultsArray);
-
-  console.log("Below is sortedArray");
-
-  console.log(sortedArray);
 
   return resultsArray;
 }
